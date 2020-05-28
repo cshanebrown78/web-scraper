@@ -7,16 +7,25 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/">Home <span class="sr-only"></span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/saved">Saved Articles</a>
                     </li>
                 </ul>
-                <span class="navbar-text">
-                    {{!-- <a href="/scraped" id="scrape" class="btn btn-primary">Scrape Articles</a> --}}
-                    <button class="btn btn-primary scrape-btn">Scrape Articles</button>
-                </span>
+                {{!-- <span class="navbar-text">
+                    <a href="/scrape" id="scrape" class="btn btn-primary">Scrape Articles</a>
+                </span> --}}
             </div>
     </nav>
+        {{#each articles}}
+            <div class="card">
+                <div class="card-header">
+                    <h4 id = "title-{{@index}}">{{this.title}}</h4>
+                    <a href="{{this.link}}" id="link-{{@index}}">{{this.link}}</a>
+                </div>
+                <div class="card-body">
+                    
+                </div>
+            </div>
 </div>
