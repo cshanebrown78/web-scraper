@@ -91,6 +91,33 @@ app.get("/scrape", function(req, res) {
 
 
 
+  // Create a saved Article using the `result` object built from button press
+    app.post("/api/saved", function(req, res) {
+        db.Article.create(req.body)
+         .then(function(dbArticle) {
+           console.log(dbArticle);
+           res.json(dbArticle)
+        })
+        .catch(function(err) {
+          // If an error occurred, log it
+          res.json(err);
+        });
+    });
+
+    // Route for getting all the saved articles
+    app.get("/saved", function(req, res) {
+      db.Article.find({})
+        .then(function(dbArticle) {
+          res.render("saved", {saved: dbArticle});
+        })
+        .catch(function(err) {
+          res.json(err);
+        });
+    });
+        
+
+
+
 // Start the server
 app.listen(PORT, function() {
     console.log("App running on port " + PORT + "!");
