@@ -42,8 +42,14 @@ mongoose.connect(MONGODB_URI);
 
 var results = [];
 
+function clearResults() {
+  results = [];
+}
+
 app.get("/", function(req,res) {
-      results = [];
+      clearResults();
+      // console.log("results")
+      // console.log(results);
       res.render("index");
 });
 
@@ -63,13 +69,14 @@ app.get("/scrape", function(req, res) {
         result.title = $(this)
           .children("h2")
           .text();
-        result.link = $(this)
+        result.link = "https://www.nytimes.com/" + $(this)
           .attr("href");
         result.summary = $(this)
           .children("p")
           .text();
         results.push(result);
-        console.log(results)
+        // console.log("results")
+        // console.log(results.length)
   
         // Create a new Article using the `result` object built from scraping
         // db.Article.create(result)
