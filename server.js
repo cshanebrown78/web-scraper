@@ -2,6 +2,7 @@ var express = require("express");
 // var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
+var Handlebars = require("handlebars");
 var exphbs = require("express-handlebars");
 
 // Scraping tools
@@ -10,6 +11,8 @@ var cheerio = require("cheerio");
 
 // Requires all models
 var db = require("./models");
+
+var {allowInsecurePrototypeAccess} = require("@handlebars/allow-prototype-access");
 
 var PORT = process.env.PORT || 3000;
 
@@ -26,7 +29,12 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine("handlebars", exphbs({ 
+  defaultLayout: "main",
+  handlebars: allowInsecurePrototypeAccess(Handlebars)
+  })
+);
+// app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
 
 
@@ -78,16 +86,6 @@ app.get("/scrape", function(req, res) {
         // console.log("results")
         // console.log(results.length)
   
-        // Create a new Article using the `result` object built from scraping
-        // db.Article.create(result)
-        //   .then(function(dbArticle) {
-        //     console.log(dbArticle);
-        //   })
-        //   .catch(function(err) {
-        //     // If an error occurred, log it
-        //     console.log(err);
-        //   });
-
       });
   
       // Send a message to the client
@@ -102,7 +100,7 @@ app.get("/scrape", function(req, res) {
     app.post("/api/saved", function(req, res) {
         db.Article.create(req.body)
          .then(function(dbArticle) {
-           console.log(dbArticle);
+          //  console.log(dbArticle);
            res.json(dbArticle)
         })
         .catch(function(err) {
@@ -115,6 +113,7 @@ app.get("/scrape", function(req, res) {
     app.get("/saved", function(req, res) {
       db.Article.find({})
         .then(function(dbArticle) {
+          console.log(dbArticle);             
           res.render("saved", {saved: dbArticle});
         })
         .catch(function(err) {

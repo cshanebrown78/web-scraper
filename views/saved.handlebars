@@ -10,7 +10,7 @@
                         <a class="nav-link" href="/">Home <span class="sr-only"></span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/saved">Saved Articles</a>
+                        <a class="nav-link" href="/scrape">Scraped Articles</a>
                     </li>
                 </ul>
                 
@@ -21,11 +21,14 @@
                 <div class="card">
                     <div class="card-header">
                       <div class="row">  
-                        <div class = "col-sm-10">
+                        <div class = "col-sm-8">
                             <a href="{{this.link}}" id="link-{{this._id}}"><strong>{{this.title}}</strong></a>
                         </div>
-                        <div class = "col-sm-2>">
-                            {{!-- <button id = "article-{{this.id}}" class = "btn btn-info save">Save Article</button> --}}
+                        <div class = "col-sm-2">
+                            <button id = "article-{{this.id}}" class = "btn btn-primary btn-sm note">Article Note</button>
+                        </div>
+                        <div class = "col-sm-2">
+                            <button id = "article-{{this.id}}" class = "btn btn-danger btn-sm danger">Delete Article</button>
                         </div>
                       </div>  
                     </div>
