@@ -7,7 +7,7 @@ var Schema = mongoose.Schema;
 // This is similar to a Sequelize model
 var NoteSchema = new Schema({
   
-  title: String,
+  // title: String,
  
   body: String
 });

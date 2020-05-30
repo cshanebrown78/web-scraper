@@ -22,13 +22,13 @@
                     <div class="card-header">
                       <div class="row">  
                         <div class = "col-sm-8">
-                            <a href="{{this.link}}" id="link-{{this._id}}"><strong>{{this.title}}</strong></a>
+                            <a href="{{this.link}}" id="link-{{this._id}}"><strong id="title-"+ {{this._id}}>{{this.title}}</strong></a>
                         </div>
                         <div class = "col-sm-2">
-                            <button id = "article-{{this.id}}" class = "btn btn-primary btn-sm note">Article Note</button>
+                            <button article-id = "{{this._id}}" class = "btn btn-primary btn-sm note">Article Note</button>
                         </div>
                         <div class = "col-sm-2">
-                            <button id = "article-{{this.id}}" class = "btn btn-danger btn-sm danger">Delete Article</button>
+                            <button article-id = "{{this._id}}" class = "btn btn-danger btn-sm danger">Delete Article</button>
                         </div>
                       </div>  
                     </div>
@@ -38,4 +38,30 @@
                 </div><br>
             {{!-- </div><br> --}}
         {{/each}}
+
+    {{!-- <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{data.title}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="notes"></div>
+                    <hr>
+                    <div class="md-form mb-5">
+                        <input type="text" id="article-note" placeholder="Type note here">
+                        <label for="article-note" class="control-label"></label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    {{!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
+                    <button type="button" class="btn btn-primary" id="save-note">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div> --}}
 </div>

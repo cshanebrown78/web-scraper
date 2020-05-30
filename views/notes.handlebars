@@ -1,0 +1,85 @@
+<div class = "container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand">NY Times Science Scraper </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home <span class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/saved">Saved Articles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/scrape">Scraped Articles</a>
+                    </li>
+                </ul>
+                
+            </div>
+    </nav><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>"{{data.title}}</h3>
+                <br>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Notes</h4>
+                    {{#if data.note}}
+                        {{#each data.note}}
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <h5>{{this.body}}</h5>
+                                </div>
+                                <div class="col-sm-12">
+                                    <button article-id={{this._id}} class="btn btn-danger note-delete">Delete</button>
+                                </div>
+                            </div>
+                        {{/each}}
+                        {{else}}
+                            <h5>There are no saved comments</h5>
+                        {{/if}}
+            </div>
+            <div class="col-md-6">
+                <form class="clearfix mb-4">
+                    <div class="form-group">
+                        <label for="the-note"><h4>Type note here</h4></label>
+                        <textarea class="form-control" id="the-note" rows="5" placeholder="note"></textarea>
+                    </div>
+                    <button id="submit" note-id={{data._id}} class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+        {{#each saved}}
+            {{!-- <div class = "card-container"> --}}
+                <div class="card">
+                    <div class="card-header">
+                      <div class="row">  
+                        <div class = "col-sm-8">
+                            <a href="{{this.link}}" id="link-{{this._id}}"><strong id="title-"+ {{this._id}}>{{this.title}}</strong></a>
+                        </div>
+                        <div class = "col-sm-2">
+                            <button type="button" article-id = "article-{{this._id}}" class = "btn btn-primary btn-sm note" data-toggle="modal" data-target="#myModal">Article Note</button>
+                        </div>
+                        <div class = "col-sm-2">
+                            <button article-id = "article-{{this._id}}" class = "btn btn-danger btn-sm danger">Delete Article</button>
+                        </div>
+                      </div>  
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{this.summary}}</p>
+                    </div>
+                </div><br>
+            {{!-- </div><br> --}}
+        {{/each}}
+
+    
+</div>

@@ -24,3 +24,16 @@ $(document).on("click", ".save", function() {
     })
 
 });
+
+$(document).on("click", ".note", function() {
+    thisId = $(this).attr("article-id")
+    // console.log(thisId)
+    $.ajax({
+        method: "GET",
+        url: "/articles/" + thisId
+    })
+    window.location.replace("/articles/" + thisId);
+})
+
+
+
