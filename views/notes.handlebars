@@ -35,11 +35,11 @@
                         {{#each data.note}}
                             <hr>
                             <div class="row">
-                                <div class="col-sm-9">
+                                <div class="col-sm-11">
                                     <h5>{{this.body}}</h5>
                                 </div>
-                                <div class="col-sm-12">
-                                    <button article-id={{this._id}} class="btn btn-danger note-delete">Delete</button>
+                                <div class="col-sm-1">
+                                    <button article-id={{this._id}} class="btn btn-danger btn-sm note-delete">X</button>
                                 </div>
                             </div>
                         {{/each}}
@@ -49,37 +49,20 @@
             </div>
             <div class="col-md-6">
                 <form class="clearfix mb-4">
+                    {{!-- <div class="form-group">
+                        <label for="note-title"><h4>Note Title</h4></label>
+                        <textarea class="form-control" id="note-title" placeholder="Note Title"></textarea>
+                    </div> --}}
                     <div class="form-group">
-                        <label for="the-note"><h4>Type note here</h4></label>
-                        <textarea class="form-control" id="the-note" rows="5" placeholder="note"></textarea>
+                        <label for="the-note"><h4>Enter Note</h4></label>
+                        <textarea class="form-control" id="the-note" rows="5" placeholder="Type note here"></textarea>
                     </div>
-                    <button id="submit" note-id={{data._id}} class="btn btn-primary">Save</button>
+                    <button id="note-submit" note-id={{data._id}} class="btn btn-primary">Save</button>
                 </form>
             </div>
         </div>
     </div>
-        {{#each saved}}
-            {{!-- <div class = "card-container"> --}}
-                <div class="card">
-                    <div class="card-header">
-                      <div class="row">  
-                        <div class = "col-sm-8">
-                            <a href="{{this.link}}" id="link-{{this._id}}"><strong id="title-"+ {{this._id}}>{{this.title}}</strong></a>
-                        </div>
-                        <div class = "col-sm-2">
-                            <button type="button" article-id = "article-{{this._id}}" class = "btn btn-primary btn-sm note" data-toggle="modal" data-target="#myModal">Article Note</button>
-                        </div>
-                        <div class = "col-sm-2">
-                            <button article-id = "article-{{this._id}}" class = "btn btn-danger btn-sm danger">Delete Article</button>
-                        </div>
-                      </div>  
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">{{this.summary}}</p>
-                    </div>
-                </div><br>
-            {{!-- </div><br> --}}
-        {{/each}}
+  
 
     
 </div>

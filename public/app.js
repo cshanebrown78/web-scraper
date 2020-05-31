@@ -1,3 +1,4 @@
+
 $(document).on("click", ".scrape-btn", function() {
     event.preventDefault();
 $.ajax({
@@ -9,14 +10,14 @@ $.ajax({
 
 $(document).on("click", ".save", function() {
     event.preventDefault();
-    articleID = $(this).attr("article-id")
+    var articleID = $(this).attr("article-id")
 
     $(this).hide()
     var data = {}
     data.title = $("#title-" + articleID).text();
     data.link = $("#link-" + articleID).attr("href");
     data.summary = $("#summary-" + articleID).text();
-    console.log(data);
+    // console.log(data);
     $.ajax({
         method: "POST",
         url: "/api/saved",
@@ -26,14 +27,55 @@ $(document).on("click", ".save", function() {
 });
 
 $(document).on("click", ".note", function() {
-    thisId = $(this).attr("article-id")
-    // console.log(thisId)
+    event.preventDefault();
+    var thisId = $(this).attr("article-id")
+    // console.log("front end get- " + thisId);
     $.ajax({
         method: "GET",
-        url: "/articles/" + thisId
+        url: "/notes/" + thisId
     })
-    window.location.replace("/articles/" + thisId);
+
+    
+    window.location.replace("/notes/" + thisId);
 })
 
+// submitting note
+$(document).on("click", "#note-submit", function() {
+    // event.preventDefault();
+    var thisId = $(this).attr("note-id")
+    // console.log("id test- " + thisId);
+    $.ajax({
+        method: "POST",
+        url: "/notes/" + thisId,
+        data: {body: $("#the-note").val()}
+    })
+    .then(function(data) {
+        console.log("data- " + data);
+        window.location.replace("/notes/" + data._id);
+    });
+    $("#the-note").val("");
+});
 
+$(document).on("click", ".delete", function() {
+    var thisId = $(this).attr("article-id");
+    $.ajax({
+        method: "DELETE",
+        url: "/saved/" + thisId
+    })
+    .then(function(data) {
+        location.reload();
+    });
+    
+});
 
+$(document).on("click", ".note-delete", function() {
+    var thisId = $(this).attr("article-id");
+    $.ajax({
+        method: "DELETE",
+        url: "/notes/" + thisId
+    })
+    .then(function(data) {
+        location.reload();
+    });
+    
+});

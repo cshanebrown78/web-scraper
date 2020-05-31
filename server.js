@@ -113,7 +113,7 @@ app.get("/scrape", function(req, res) {
     app.get("/saved", function(req, res) {
       db.Article.find({})
         .then(function(dbArticle) {
-          console.log(dbArticle);             
+          // console.log(dbArticle);             
           res.render("saved", {saved: dbArticle});
         })
         .catch(function(err) {
@@ -122,28 +122,31 @@ app.get("/scrape", function(req, res) {
     });
 
     // Route for grabbing a specific Article by id, populate it with it's note
-app.get("/articles/:id", function(req, res) {
-  console.log(req.params.id);
+app.get("/notes/:id", function(req, res) {
+  // console.log("app.get route- " + req.params.id);
   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
   db.Article.findOne({ _id: req.params.id })
     // ..and populate all of the notes associated with it
     .populate("note")
     .then(function(dbArticle) {
       // If we were able to successfully find an Article with the given id, send it back to the client
+      // console.log(dbArticle);
+      if (dbArticle) {
       res.render("notes", {data: dbArticle});
+      }
     })
-    .catch(function(err) {
+      .catch(function(err) {
       // If an error occurred, send it to the client
       res.json(err);
     });
 });
 
 // Route for saving/updating an Article's associated Note
-app.post("/articles/:id", function(req, res) {
+app.post("/notes/:id", function(req, res) {
   // Create a new note and pass the req.body to the entry
   db.Note.create(req.body)
     .then(function(dbNote) {
-      return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+      return db.Article.findOneAndUpdate({ _id: req.params.id }, { $push: {note: dbNote._id }}, { new: true });
     })
     .then(function(dbArticle) {
       // If successfully updated an Article, send it back to the client
@@ -156,7 +159,7 @@ app.post("/articles/:id", function(req, res) {
 });
         
 //Route for deleting a note
-app.delete("/articles/:id", function(req,res) {
+app.delete("/notes/:id", function(req,res) {
   db.Note.deleteOne({ _id: req.params.id })
   .then(function(removed) {
     res.json(removed);
