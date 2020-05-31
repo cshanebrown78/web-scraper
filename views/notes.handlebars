@@ -37,18 +37,21 @@
                 <h4>Notes</h4>
 
                 <div class="card notecard">
-                    <div class="card-body" {{#if data.note}} {{#each data.note}} <hr>
-                        <div class="row">
-                            <div class="col-sm-10">
-                                <h5>{{this.body}}</h5>
-                            </div>
-                            <div class="col-sm-2">
-                                <button article-id={{this._id}} class="btn btn-danger btn-sm note-delete">X</button>
-                            </div>
-                        </div>
-                        {{/each}}
+                    <div class="card-body">
+                        {{#if data.note}} 
+                            {{#each data.note}}
+                                <div class="row">
+                                    <div class="col-sm-10">
+                                        <h5>{{this.body}}</h5>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button article-id={{this._id}} class="btn btn-danger btn-sm note-delete">X</button>
+                                    </div>
+                                </div>
+                                <hr>
+                            {{/each}}
                         {{else}}
-                        <h5>There are no saved notes</h5>
+                            <h5>There are no saved notes</h5>
                         {{/if}}
                     </div>
                 </div>

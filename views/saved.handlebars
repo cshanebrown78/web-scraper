@@ -17,29 +17,31 @@
 
         </div>
     </nav><br>
-    {{#each saved}}
-    {{!-- <div class = "card-container"> --}}
-    <div class="card shadow p-3 mb-5 bg-white rounded">
-        <div class="card-header">
-            <div class="row">
-                <div class="col-sm-8">
-                    <a href="{{this.link}}" id="link-{{this._id}}"><strong id="title-" +
-                            {{this._id}}>{{this.title}}</strong></a>
+    {{#if saved}}
+        {{#each saved}}
+            <div class="card shadow p-3 mb-5 bg-white rounded">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <a href="{{this.link}}" id="link-{{this._id}}"><strong id="title-" +
+                                    {{this._id}}>{{this.title}}</strong></a>
+                        </div>
+                        <div class="col-sm-2">
+                            <button article-id="{{this._id}}" class="btn btn-primary btn-sm note">Article Note</button>
+                        </div>
+                        <div class="col-sm-2">
+                            <button article-id="{{this._id}}" class="btn btn-danger btn-sm delete">Delete Article</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm-2">
-                    <button article-id="{{this._id}}" class="btn btn-primary btn-sm note">Article Note</button>
-                </div>
-                <div class="col-sm-2">
-                    <button article-id="{{this._id}}" class="btn btn-danger btn-sm delete">Delete Article</button>
+                <div class="card-body">
+                    <p class="card-text">{{this.summary}}</p>
                 </div>
             </div>
-        </div>
-        <div class="card-body">
-            <p class="card-text">{{this.summary}}</p>
-        </div>
-    </div>
-    {{!-- </div><br> --}}
-    {{/each}}
-
+        
+        {{/each}}
+    {{else}}
+        <h5>There are no saved articles</h5>
+    {{/if}}
 
 </div>
