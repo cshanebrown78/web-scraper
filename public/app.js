@@ -7,6 +7,7 @@ $(document).on("click", ".scrape-btn", function () {
   window.location.replace("/scrape");
 });
 
+
 $(document).on("click", ".save", function () {
   event.preventDefault();
   var articleID = $(this).attr("article-id");
@@ -19,7 +20,7 @@ $(document).on("click", ".save", function () {
   // console.log(data);
   $.ajax({
     method: "POST",
-    url: "/api/saved",
+    url: "/saved",
     data: data,
   });
 });

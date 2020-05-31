@@ -92,19 +92,17 @@ app.get("/scrape", function(req, res) {
   });
 
 
+    app.post("/saved", function(req, res) {
+      db.Article.create(req.body)
+       .then(function(dbArticle) {
 
-  // Create a saved Article using the `result` object built from button press
-    app.post("/api/saved", function(req, res) {
-        db.Article.create(req.body)
-         .then(function(dbArticle) {
-
-           res.json(dbArticle)
-        })
-        .catch(function(err) {
-          // If an error occurred, log it
-          res.json(err);
-        });
-    });
+         res.json(dbArticle)
+      })
+      .catch(function(err) {
+        // If an error occurred, log it
+        res.json(err);
+      });
+  });
 
     // Route for getting all the saved articles
     app.get("/saved", function(req, res) {
