@@ -1,67 +1,45 @@
-<div class = "container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand">NY Times Science Scraper </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/">Home <span class="sr-only"></span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/scrape">Scraped Articles</a>
-                    </li>
-                </ul>
-                
-            </div>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/scrape">Scraped Articles</a>
+                </li>
+            </ul>
+
+        </div>
     </nav><br>
-        {{#each saved}}
-            {{!-- <div class = "card-container"> --}}
-                <div class="card">
-                    <div class="card-header">
-                      <div class="row">  
-                        <div class = "col-sm-8">
-                            <a href="{{this.link}}" id="link-{{this._id}}"><strong id="title-"+ {{this._id}}>{{this.title}}</strong></a>
-                        </div>
-                        <div class = "col-sm-2">
-                            <button article-id = "{{this._id}}" class = "btn btn-primary btn-sm note">Article Note</button>
-                        </div>
-                        <div class = "col-sm-2">
-                            <button article-id = "{{this._id}}" class = "btn btn-danger btn-sm delete">Delete Article</button>
-                        </div>
-                      </div>  
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">{{this.summary}}</p>
-                    </div>
-                </div><br>
-            {{!-- </div><br> --}}
-        {{/each}}
-
-    {{!-- <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">{{data.title}}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+    {{#each saved}}
+    {{!-- <div class = "card-container"> --}}
+    <div class="card shadow p-3 mb-5 bg-white rounded">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-sm-8">
+                    <a href="{{this.link}}" id="link-{{this._id}}"><strong id="title-" +
+                            {{this._id}}>{{this.title}}</strong></a>
                 </div>
-                <div class="modal-body">
-                    <div id="notes"></div>
-                    <hr>
-                    <div class="md-form mb-5">
-                        <input type="text" id="article-note" placeholder="Type note here">
-                        <label for="article-note" class="control-label"></label>
-                    </div>
+                <div class="col-sm-2">
+                    <button article-id="{{this._id}}" class="btn btn-primary btn-sm note">Article Note</button>
                 </div>
-                <div class="modal-footer">
-                    {{!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
-                    <button type="button" class="btn btn-primary" id="save-note">Save changes</button>
+                <div class="col-sm-2">
+                    <button article-id="{{this._id}}" class="btn btn-danger btn-sm delete">Delete Article</button>
                 </div>
             </div>
         </div>
-    </div> --}}
+        <div class="card-body">
+            <p class="card-text">{{this.summary}}</p>
+        </div>
+    </div>
+    {{!-- </div><br> --}}
+    {{/each}}
+
+
 </div>

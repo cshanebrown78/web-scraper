@@ -1,0 +1,45 @@
+body {
+  background-image: url(images/newspaper.jpg);
+}
+
+.navbar-brand {
+  color: white;
+}
+
+.card-header {
+  background: black;
+  color: white;
+}
+
+.jumbotron {
+  background-image: url(images/beakers.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
+}
+
+.jumbotron h1 {
+  font-weight: 700;
+}
+
+.center {
+  text-align: center;
+}
+
+.main {
+  background-color: rgb(235, 227, 227);
+  /* opacity: .6; */
+}
+
+.title {
+  background-color: rgb(235, 227, 227);
+}
+
+.main h2 {
+  font-weight: 700;
+  opacity: 1;
+}
+
+.center h3 {
+  font-weight: 700;
+}

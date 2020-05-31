@@ -44,7 +44,7 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsScrape";
 
 mongoose.connect(MONGODB_URI);
 
-// mongoose.connect("mongodb://localhost/unit18Populater", { useNewUrlParser: true });
+
 
 // Routes
 
@@ -56,17 +56,16 @@ function clearResults() {
 
 app.get("/", function(req,res) {
       clearResults();
-      // console.log("results")
-      // console.log(results);
       res.render("index");
 });
 
 app.get("/scrape", function(req, res) {
+    clearResults();
     // Grabs the body of the html with axios
     axios.get("https://www.nytimes.com/section/science").then(function(response) {
       // Loads that into cheerio and save it to $ for a shorthand selector
       var $ = cheerio.load(response.data);
-    //   console.log(response.data)
+ 
   
       // Now, we grab every h2 within an article tag, and do the following:
       $("#stream-panel ol li div div a").each(function(i, element) {
@@ -83,14 +82,12 @@ app.get("/scrape", function(req, res) {
           .children("p")
           .text();
         results.push(result);
-        // console.log("results")
-        // console.log(results.length)
-  
+
       });
   
       // Send a message to the client
       res.render("scrape", {articles: results});
-      // res.send("Scrape Complete");
+
     });
   });
 
@@ -100,7 +97,7 @@ app.get("/scrape", function(req, res) {
     app.post("/api/saved", function(req, res) {
         db.Article.create(req.body)
          .then(function(dbArticle) {
-          //  console.log(dbArticle);
+
            res.json(dbArticle)
         })
         .catch(function(err) {
@@ -113,7 +110,7 @@ app.get("/scrape", function(req, res) {
     app.get("/saved", function(req, res) {
       db.Article.find({})
         .then(function(dbArticle) {
-          // console.log(dbArticle);             
+          
           res.render("saved", {saved: dbArticle});
         })
         .catch(function(err) {
@@ -123,14 +120,14 @@ app.get("/scrape", function(req, res) {
 
     // Route for grabbing a specific Article by id, populate it with it's note
 app.get("/notes/:id", function(req, res) {
-  // console.log("app.get route- " + req.params.id);
+
   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
   db.Article.findOne({ _id: req.params.id })
     // ..and populate all of the notes associated with it
     .populate("note")
     .then(function(dbArticle) {
       // If we were able to successfully find an Article with the given id, send it back to the client
-      // console.log(dbArticle);
+
       if (dbArticle) {
       res.render("notes", {data: dbArticle});
       }
